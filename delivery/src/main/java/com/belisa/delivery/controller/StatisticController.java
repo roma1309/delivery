@@ -18,6 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/stat")
+@CrossOrigin
 public class StatisticController {
     private final StatisticService statisticService;
     private final ProductService productService;
