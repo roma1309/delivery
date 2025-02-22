@@ -4,7 +4,7 @@ import { NewProduct } from '../models/NewProduct';
 import { Observable } from 'rxjs';
 import { Product } from '../models/Product';
 
-const PRODUCT_API = 'http://localhost:8080/products/'
+const PRODUCT_API = 'http://localhost:8081/products/';
 @Injectable({
   providedIn: 'root'
 })

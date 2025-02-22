@@ -1,0 +1,86 @@
+<div class="container">
+    <h2>Create Product</h2>
+  
+    <!-- Show success message when the product is created -->
+    <div *ngIf="isProductCreated" class="alert alert-success">
+      Product created successfully!
+    </div>
+  
+    <!-- Product creation form -->
+    <form [formGroup]="productFrom" (ngSubmit)="submit()">
+      <div class="form-group">
+        <label for="category">Category</label>
+        <input
+          id="category"
+          formControlName="category"
+          type="text"
+          class="form-control"
+          [ngClass]="{'is-invalid': productFrom.get('category')?.invalid && productFrom.get('category')?.touched}"
+        />
+        <div *ngIf="productFrom.get('category')?.invalid && productFrom.get('category')?.touched" class="invalid-feedback">
+          Category is required.
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="courier">Courier</label>
+        <input
+          id="courier"
+          formControlName="courier"
+          type="text"
+          class="form-control"
+          [ngClass]="{'is-invalid': productFrom.get('courier')?.invalid && productFrom.get('courier')?.touched}"
+        />
+        <div *ngIf="productFrom.get('courier')?.invalid && productFrom.get('courier')?.touched" class="invalid-feedback">
+          Courier is required.
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="senderId">Sender ID</label>
+        <mat-select formControlName="senderId"  class="form-control"  >
+          <mat-option *ngFor="let user of users" [value]="user.id">
+            {{user.username}}
+          </mat-option>
+        </mat-select>
+        <div *ngIf="productFrom.get('senderId')?.invalid && productFrom.get('senderId')?.touched" class="invalid-feedback">
+          Sender ID is required.
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="receiverId">Receiver ID</label>
+        <!-- <input
+          id="receiverId"
+          formControlName="receiverId"
+          type="text"
+          class="form-control"
+          [ngClass]="{'is-invalid': productFrom.get('receiverId')?.invalid && productFrom.get('receiverId')?.touched}"
+        /> -->
+        <mat-select formControlName="receiverId"  class="form-control"  >
+            <mat-option *ngFor="let user of users" [value]="user.id">
+              {{user.username}}
+            </mat-option>
+          </mat-select>
+        <div *ngIf="productFrom.get('receiverId')?.invalid && productFrom.get('receiverId')?.touched" class="invalid-feedback">
+          Receiver ID is required.
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="name">Product Name</label>
+        <input
+          id="name"
+          formControlName="name"
+          type="text"
+          class="form-control"
+          [ngClass]="{'is-invalid': productFrom.get('name')?.invalid && productFrom.get('name')?.touched}"
+        />
+        <div *ngIf="productFrom.get('name')?.invalid && productFrom.get('name')?.touched" class="invalid-feedback">
+          Product Name is required.
+        </div>
+      </div>
+  
+      <button type="submit" class="btn btn-primary" [disabled]="productFrom.invalid">Create Product</button>
+    </form>
+  </div>

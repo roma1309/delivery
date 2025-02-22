@@ -1,0 +1,33 @@
+<h1>Menu</h1>
+
+<mat-toolbar color="primary">
+    <span>Меню</span>
+  </mat-toolbar>
+  
+  <mat-sidenav mode="side" opened>
+    <mat-nav-list>
+      <a mat-list-item routerLink="/products">
+        <mat-icon>add</mat-icon>
+        Создать товар
+      </a>
+      <a mat-list-item routerLink="/statistic">
+        <mat-icon>bar_chart</mat-icon>
+        Статистика
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <!-- <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav mode="side" opened>
+      <mat-nav-list>
+        <a mat-list-item routerLink="/create-product">
+          <mat-icon>add</mat-icon>
+          Создать товар
+        </a>
+        <a mat-list-item routerLink="/statistics">
+          <mat-icon>bar_chart</mat-icon>
+          Статистика
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>
+  </mat-sidenav-container> -->
