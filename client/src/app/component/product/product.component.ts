@@ -19,6 +19,8 @@ export class ProductComponent {
 
   productFrom!:FormGroup;
   createdProduct!:Product;
+  products!: Product[];
+  updateStatusProduct!: Product;
   isProductCreated=false;
   users!:User[];
   
@@ -28,6 +30,7 @@ export class ProductComponent {
     private fb:FormBuilder) { }
 
 ngOnInit(): void {
+this.getProduct();
 this.productFrom = this.createProductForm();
 this.getUsers();
 }
@@ -61,6 +64,20 @@ getUsers():void {
   this.userService.getAllUsers()
    .subscribe(data => {
     this.users = data;
+   });
+}
+getProduct():void {
+  this.productSevice.getAll()
+   .subscribe(data => {
+    this.products = data;
+   });
+}
+
+updateProduct(id: number):void {
+  this.productSevice.updateProduct(id)
+   .subscribe(data => {
+    this.updateStatusProduct = data;
+    window.location.reload();
    });
 }
 }

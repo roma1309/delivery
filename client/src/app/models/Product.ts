@@ -4,6 +4,6 @@ export interface Product{
     status: string;
     category: string;
     courier: string;
-    senderId: number;
-    receiverId: number;
+    sender: string;
+    receiver: string;
 }

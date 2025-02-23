@@ -4,7 +4,7 @@ import { NewProduct } from '../models/NewProduct';
 import { Observable } from 'rxjs';
 import { Product } from '../models/Product';
 
-const PRODUCT_API = 'http://localhost:8081/products/';
+const PRODUCT_API = 'http://localhost:8081/products';
 @Injectable({
   providedIn: 'root'
 })
@@ -17,6 +17,9 @@ export class ProductService {
   }
 
   updateProduct(id: Number): Observable<Product>{
-    return this.http.put<Product>(PRODUCT_API + "update/" + id, null);
+    return this.http.put<Product>(PRODUCT_API + "/update/" + id, null);
+  }
+  getAll(): Observable<Product[]>{
+    return this.http.get<Product[]>(PRODUCT_API)
   }
 }

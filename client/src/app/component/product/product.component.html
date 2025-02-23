@@ -10,16 +10,20 @@
     <form [formGroup]="productFrom" (ngSubmit)="submit()">
       <div class="form-group">
         <label for="category">Category</label>
-        <input
-          id="category"
-          formControlName="category"
-          type="text"
-          class="form-control"
-          [ngClass]="{'is-invalid': productFrom.get('category')?.invalid && productFrom.get('category')?.touched}"
-        />
-        <div *ngIf="productFrom.get('category')?.invalid && productFrom.get('category')?.touched" class="invalid-feedback">
-          Category is required.
-        </div>
+        <select
+            id="category"
+            formControlName="category"
+            class="form-control"
+            [ngClass]="{'is-invalid': productFrom.get('category')?.invalid && productFrom.get('category')?.touched}"
+          >
+            <option value="" disabled selected>Select a category</option>
+            <option value="TECHNICAL">Техника</option>
+            <option value="CLOTHING">Одежда</option>
+            <option value="FOOD">Еда</option>
+          </select>
+          <div *ngIf="productFrom.get('category')?.invalid && productFrom.get('category')?.touched" class="invalid-feedback">
+            Category is required.
+          </div>
       </div>
   
       <div class="form-group">
@@ -83,4 +87,39 @@
   
       <button type="submit" class="btn btn-primary" [disabled]="productFrom.invalid">Create Product</button>
     </form>
+
+    <div class="mt-4">
+      <h3>Product List</h3>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Product Name</th>
+            <th>Category</th>
+            <th>Status</th>
+            <th>Courier</th>
+            <th>Sender</th>
+            <th>Receiver</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of products">
+            <td>{{ product.id }}</td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.category }}</td>
+            <td>{{ product.status }}</td>
+            <td>{{ product.courier }}</td>
+            <td>{{ product.sender }}</td>
+            <td>{{ product.receiver }}</td>
+            <td>
+              <!-- Кнопка "Получить заказ", которая видна только при статусе IN_TRANSIT -->
+              <button *ngIf="product.status === 'IN_TRANSIT'" class="btn btn-success" (click)="updateProduct(product.id)">
+                Получить заказ
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
