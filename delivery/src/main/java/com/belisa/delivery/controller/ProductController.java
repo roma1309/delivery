@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @RestController
 @RequestMapping("/products")
@@ -20,6 +21,11 @@ public class ProductController {
     @Autowired
     public ProductController(ProductService productService) {
         this.productService = productService;
+    }
+
+    @GetMapping
+    public ResponseEntity<List<ProductDto>> getAll() {
+        return new ResponseEntity<>(productService.getAll(), HttpStatus.OK);
     }
 
     @PostMapping()

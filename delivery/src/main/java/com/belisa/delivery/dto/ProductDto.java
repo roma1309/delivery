@@ -1,14 +1,15 @@
 package com.belisa.delivery.dto;
 
 public class ProductDto {
+    private Long id;
     private String name;
 
     private String category;
     private String status;
 
-    private Long senderId;
+    private String sender;
 
-    private Long receiverId;
+    private String receiver;
 
     private String courier;
 
@@ -36,20 +37,20 @@ public class ProductDto {
         this.status = status;
     }
 
-    public Long getSenderId() {
-        return senderId;
+    public String getSender() {
+        return sender;
     }
 
-    public void setSenderId(Long senderId) {
-        this.senderId = senderId;
+    public void setSender(String sender) {
+        this.sender = sender;
     }
 
-    public Long getReceiverId() {
-        return receiverId;
+    public String getReceiver() {
+        return receiver;
     }
 
-    public void setReceiverId(Long receiverId) {
-        this.receiverId = receiverId;
+    public void setReceiver(String receiver) {
+        this.receiver = receiver;
     }
 
     public String getCourier() {
@@ -58,5 +59,13 @@ public class ProductDto {
 
     public void setCourier(String courier) {
         this.courier = courier;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

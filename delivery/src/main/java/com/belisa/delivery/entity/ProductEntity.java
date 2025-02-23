@@ -4,6 +4,7 @@ import com.belisa.delivery.entity.enums.ProductCategory;
 import com.belisa.delivery.entity.enums.ProductStatus;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -31,11 +32,11 @@ public class ProductEntity {
     private String courier;
 
     @Column(nullable = false, updatable = false)
-    private LocalDateTime createdAt;
+    private LocalDate createdAt;
 
     @PrePersist
     public void prePersist() {
-        createdAt = LocalDateTime.now();
+        createdAt = LocalDate.now();
     }
 
     public ProductEntity() {
@@ -97,11 +98,25 @@ public class ProductEntity {
         this.courier = courier;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public LocalDate getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(LocalDate createdAt) {
         this.createdAt = createdAt;
+    }
+
+    @Override
+    public String toString() {
+        return "ProductEntity{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", status=" + status +
+                ", category=" + category +
+                ", sender=" + sender +
+                ", receiver=" + receiver +
+                ", courier='" + courier + '\'' +
+                ", createdAt=" + createdAt +
+                '}';
     }
 }

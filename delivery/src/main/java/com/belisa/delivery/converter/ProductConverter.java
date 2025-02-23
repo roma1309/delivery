@@ -19,8 +19,9 @@ public class ProductConverter {
         productDto.setCategory(productEntity.getCategory().name());
         productDto.setCourier(productEntity.getCourier());
         productDto.setStatus(productEntity.getStatus().name());
-        productDto.setSenderId(productEntity.getSender().getId());
-        productDto.setReceiverId(productEntity.getReceiver().getId());
+        productDto.setSender(productEntity.getSender().getUsername());
+        productDto.setReceiver(productEntity.getReceiver().getUsername());
+        productDto.setId(productEntity.getId());
         return productDto;
     }
 }

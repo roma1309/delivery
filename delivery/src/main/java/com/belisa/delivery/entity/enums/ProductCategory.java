@@ -1,5 +1,7 @@
 package com.belisa.delivery.entity.enums;
 
+import com.belisa.delivery.exceptions.CategoryNotMatch;
+
 public enum ProductCategory {
     TECHNICAL, CLOTHING, FOOD;
 
@@ -9,6 +11,6 @@ public enum ProductCategory {
                 return productCategory;
             }
         }
-        throw new RuntimeException("Такой категории не существует");
+        throw new CategoryNotMatch("Такой категории не существует");
     }
 }
