@@ -22,11 +22,11 @@ public class StatisticEntity {
     private Map<ProductCategory, Long> categoryCount = new HashMap<>();
 
     @Column(nullable = false, updatable = false)
-    private LocalDateTime createdAt;
+    private LocalDate createdAt;
 
     @PrePersist
     public void prePersist() {
-        createdAt = LocalDateTime.now().minusDays(1);
+        createdAt = LocalDate.now();
     }
     public StatisticEntity() {
     }
@@ -51,11 +51,11 @@ public class StatisticEntity {
         this.categoryCount = categoryCount;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public LocalDate getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(LocalDate createdAt) {
         this.createdAt = createdAt;
     }
 }

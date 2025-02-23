@@ -47,7 +47,7 @@ public class ProductServiceImpl implements ProductService {
         return ProductConverter.EntityToDto(productRepository.save(productEntity));
     }
 
-    @Scheduled(cron = "0 0 4 * * ?")
+    @Scheduled(fixedDelay = 2000)
     @Override
     public void updateProductStatusToInTransit() {
         LocalDate dayNow = LocalDate.now();
@@ -57,6 +57,7 @@ public class ProductServiceImpl implements ProductService {
             product.setStatus(ProductStatus.IN_TRANSIT);
             productRepository.save(product);
         }
+        System.out.println("wefwefwe");
     }
 
     @Override

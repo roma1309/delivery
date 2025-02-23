@@ -3,13 +3,14 @@ package com.belisa.delivery.dto;
 import com.belisa.delivery.entity.enums.ProductCategory;
 import jakarta.persistence.Column;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
 public class StatisticDto {
     private Map<ProductCategory, Long> categoryCount = new HashMap<>();
-    private LocalDateTime createdAt;
+    private LocalDate createdAt;
 
     public Map<ProductCategory, Long> getCategoryCount() {
         return categoryCount;
@@ -20,11 +21,11 @@ public class StatisticDto {
         this.categoryCount = categoryCount;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public LocalDate getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(LocalDate createdAt) {
         this.createdAt = createdAt;
     }
 }
