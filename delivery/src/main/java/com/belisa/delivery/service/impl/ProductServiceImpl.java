@@ -7,6 +7,8 @@ import com.belisa.delivery.entity.ProductEntity;
 import com.belisa.delivery.entity.UserEntity;
 import com.belisa.delivery.entity.enums.ProductCategory;
 import com.belisa.delivery.entity.enums.ProductStatus;
+import com.belisa.delivery.exceptions.ReceiverSenderOneUser;
+import com.belisa.delivery.exceptions.StatusException;
 import com.belisa.delivery.repository.ProductRepository;
 import com.belisa.delivery.repository.UserRepository;
 import com.belisa.delivery.service.ProductService;
@@ -33,7 +35,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductDto createProduct(NewProductDto newProductDto) {
         if (newProductDto.getSenderId() == newProductDto.getReceiverId()) {
-            throw new RuntimeException("Курьер и получатель не могут быть одним пользователем");
+            throw new ReceiverSenderOneUser("Курьер и получатель не могут быть одним пользователем");
         }
         UserEntity receiver = userRepository.findById(newProductDto.getReceiverId()).orElseThrow(() -> new RuntimeException("Not found user"));
         UserEntity sender = userRepository.findById(newProductDto.getSenderId()).orElseThrow(() -> new RuntimeException("Not found user"));
@@ -47,7 +49,7 @@ public class ProductServiceImpl implements ProductService {
         return ProductConverter.EntityToDto(productRepository.save(productEntity));
     }
 
-    @Scheduled(fixedDelay = 2000)
+    @Scheduled(cron = "0 0 4 * * ?")
     @Override
     public void updateProductStatusToInTransit() {
         LocalDate dayNow = LocalDate.now();
@@ -57,14 +59,12 @@ public class ProductServiceImpl implements ProductService {
             product.setStatus(ProductStatus.IN_TRANSIT);
             productRepository.save(product);
         }
-        System.out.println("wefwefwe");
     }
-
     @Override
     public ProductDto markProductAsDelivered(Long productId) {
         ProductEntity product = productRepository.findById(productId).orElseThrow();
         if(!product.getStatus().equals(ProductStatus.IN_TRANSIT)){
-            throw new RuntimeException("Товар должен иметь статус в пути");
+            throw new StatusException("Товар должен иметь статус в пути");
         }
         product.setStatus(ProductStatus.DELIVERED);
         return ProductConverter.EntityToDto(productRepository.save(product));
