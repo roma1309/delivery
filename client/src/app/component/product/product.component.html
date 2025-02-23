@@ -1,12 +1,10 @@
 <div class="container">
     <h2>Create Product</h2>
   
-    <!-- Show success message when the product is created -->
     <div *ngIf="isProductCreated" class="alert alert-success">
       Product created successfully!
     </div>
-  
-    <!-- Product creation form -->
+
     <form [formGroup]="productFrom" (ngSubmit)="submit()">
       <div class="form-group">
         <label for="category">Category</label>

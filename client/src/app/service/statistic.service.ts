@@ -13,6 +13,6 @@ export class StatisticService {
   constructor(private http: HttpClient) { }
 
   getStatistics(dateFrom: string, dateTo: string):Observable<Statistic[]>{
-    return this.http.get<Statistic[]>(STATISTIC_API)
+    return this.http.get<Statistic[]>(STATISTIC_API +'?dateFrom=' + dateFrom + '&dateTo='+ dateTo)
   }
 }

@@ -1,1 +1,39 @@
-<p>statistic works!</p>
+<div class="statistic-container">
+    <h2>Статистика</h2>
+    <form [formGroup]="statisticForm" (ngSubmit)="submit()">
+      <div class="form-group">
+        <label for="dateFrom">Дата с</label>
+        <input id="dateFrom" formControlName="dateFrom" type="date" class="form-control" />
+        <div *ngIf="statisticForm.controls['dateFrom'].invalid && statisticForm.controls['dateFrom'].touched" class="error">
+          Пожалуйста, выберите дату начала.
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="dateTo">Дата по</label>
+        <input id="dateTo" formControlName="dateTo" type="date" class="form-control" />
+        <div *ngIf="statisticForm.controls['dateTo'].invalid && statisticForm.controls['dateTo'].touched" class="error">
+          Пожалуйста, выберите дату окончания.
+        </div>
+      </div>
+  
+      <button type="submit" [disabled]="statisticForm.invalid" class="btn btn-primary">Получить статистику</button>
+    </form>
+  
+    <div *ngIf="statistics && statistics.length > 0">
+        <h3>Результаты статистики</h3>
+        <div class="card-container">
+          <div *ngFor="let stat of statistics" class="card">
+            <h4>{{ stat.createdAt | date: 'dd.MM.yyyy' }}</h4>
+            
+            <div *ngFor="let category of stat.categoryCount | keyvalue">
+              <p><strong>Категория:</strong> {{ category.key }}</p>
+              <p><strong>Количество:</strong> {{ category.value }}</p>
+            </div>
+          </div>
+        </div>
+  
+      <div *ngIf="statistics && statistics.length === 0">
+        <p>Нет данных для выбранного периода.</p>
+      </div>
+  </div>
